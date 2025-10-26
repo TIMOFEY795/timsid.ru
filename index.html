@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TIM SID</title>
   <meta name="description" content="Личный сайт: общая инфа, соцсети, Steam и любимые игры." />
+
+  <!-- 🔹 Open Graph — красиво при шаринге -->
+  <meta property="og:title" content="TIM SID — блог, контент, игры" />
+  <meta property="og:description" content="Мой личный сайт, соцсети, Steam и любимые игры." />
+  <meta property="og:image" content="https://твойдомен/preview.jpg" />
+  <meta property="og:type" content="website" />
+
+  <!-- 🔹 Фавикон -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -16,6 +26,7 @@
         <a href="#about">Общая инфа</a>
         <a href="#socials">Соцсети</a>
         <a href="#steam">Steam</a>
+        <a href="#discord">Discord</a>
         <a href="#games">Игры</a>
       </div>
     </nav>
@@ -24,7 +35,7 @@
   <main class="wrap">
     <section class="hero">
       <h1 class="title" data-text="TIM SID">TIM SID</h1>
-      <div class="subtitle">Немного об о мне, ссылки и любимые игры.</div>
+      <div class="subtitle">Немного обо мне, ссылки и любимые игры.</div>
     </section>
 
     <section id="about" class="grid">
@@ -35,10 +46,10 @@
           <p>
             Привет! Здесь собраны основные ссылки и игры, которые нравятся.
             Меня зовут Тимофей, мне 15 лет — пишу о себе так, как чувствую.
-           увлекаюсь — программирование и 3D‑моделирование: из идей рождаются строки кода и объёмные формы.
+            Увлекаюсь программированием и 3D-моделированием: из идей рождаются строки кода и объёмные формы.
             В свободные минуты люблю стратегии, особенно Hearts of Iron IV — в ней ценю масштаб, альтернативные сценарии и глубокое планирование.
             Изредка выбираюсь в кооператив ради совместных эмоций, но чаще прохожу всё соло и довожу начатое до конца.
-           У меня есть канал на YouTube, куда время от времени снимаю ролики и делюсь прогрессом
+            У меня есть канал на YouTube, куда время от времени снимаю ролики и делюсь прогрессом.
           </p>
           <p>
             Поддерживаю
@@ -75,12 +86,30 @@
       </div>
     </section>
 
+    <!-- 💬 Discord -->
+    <section id="discord" class="grid">
+      <div class="card col-12">
+        <div class="bar"></div>
+        <div class="body">
+          <h2>Мой Discord сервер</h2>
+          <p>Залетай, общаемся, играем, мемим:</p>
+          <iframe
+            src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark"
+            width="100%"
+            height="400"
+            allowtransparency="true"
+            frameborder="0"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
     <section id="games" class="grid">
       <div class="card col-12">
         <div class="bar"></div>
         <div class="body">
           <h2>Игры, в которые люблю играть</h2>
-
           <div class="widget-grid">
             <div class="widget">
               <iframe src="https://store.steampowered.com/widget/394360/" title="Steam widget"></iframe>
@@ -97,10 +126,10 @@
     </section>
 
     <footer>
-      © <span id="y"></span> Сайт сделан Tim Sid уважуха мне
+      © <span id="y"></span> Сайт сделан Tim Sid — уважуха мне
     </footer>
   </main>
 
-  <script src="main.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
