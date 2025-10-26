@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TIM SID</title>
-  <meta name="description" content="Личный сайт: общая инфа, соцсети, Steam и любимые игры." />
+  <meta name="description" content="Личный сайт: общая инфа, соцсети, Steam, Discord и любимые игры." />
 
-  <!-- 🔹 Open Graph — красиво при шаринге -->
+  <!-- 🔹 Open Graph -->
   <meta property="og:title" content="TIM SID — блог, контент, игры" />
-  <meta property="og:description" content="Мой личный сайт, соцсети, Steam и любимые игры." />
+  <meta property="og:description" content="Мой личный сайт, соцсети, Steam и Discord." />
   <meta property="og:image" content="https://твойдомен/preview.jpg" />
   <meta property="og:type" content="website" />
 
@@ -16,7 +16,21 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* 💬 Стиль под Discord-виджет */
+    iframe[src*="discord.com/widget"] {
+      border-radius: 12px;
+      border: 1px solid rgba(0,229,255,0.3);
+      box-shadow: 0 0 18px rgba(0,229,255,0.25), 0 0 28px rgba(255,14,161,0.2);
+      transition: all 0.4s ease;
+    }
+    iframe[src*="discord.com/widget"]:hover {
+      box-shadow: 0 0 28px rgba(0,229,255,0.45), 0 0 38px rgba(255,14,161,0.35);
+      transform: scale(1.01);
+    }
+  </style>
 </head>
+
 <body>
   <header>
     <nav class="nav">
@@ -110,6 +124,7 @@
         <div class="bar"></div>
         <div class="body">
           <h2>Игры, в которые люблю играть</h2>
+
           <div class="widget-grid">
             <div class="widget">
               <iframe src="https://store.steampowered.com/widget/394360/" title="Steam widget"></iframe>
