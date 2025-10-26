@@ -29,216 +29,98 @@ body{
   line-height:1.65;
   overflow-x:hidden;
 }
-
-/* Лёгкие «скан-линии» поверх фона */
 body::before{
-  content:"";
-  position:fixed; inset:0;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.018),
-      rgba(255,255,255,0.018) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-  pointer-events:none;
-  mix-blend-mode: overlay;
+  content:""; position:fixed; inset:0;
+  background:repeating-linear-gradient(to bottom, rgba(255,255,255,0.018), rgba(255,255,255,0.018) 1px, transparent 1px, transparent 3px);
+  pointer-events:none; mix-blend-mode: overlay;
 }
-
 a{ color:var(--neon1); text-decoration:none }
 img{ max-width:100%; height:auto; display:block }
 
-/* ========== Центрирующий контейнер ========== */
-/* Весь контент и навигация ограничены по ширине и центрированы */
-.wrap{
-  max-width: 820px;      /* «собранная» ширина контента */
-  width: 92vw;           /* чуть «дышит» на очень узких экранах */
-  margin-inline: auto;   /* центрирование контейнера */
-  padding: 24px 0 64px;
-}
-.nav{
-  max-width: 820px;
-  width: 92vw;
-  margin-inline: auto;   /* центрирование шапки */
-  display:flex; align-items:center; gap:16px;
-  padding:12px 0;
-}
+/* Центр */
+.wrap{ max-width: 820px; width: 92vw; margin-inline: auto; padding: 24px 0 64px; }
+.nav{ max-width: 820px; width: 92vw; margin-inline:auto; display:flex; align-items:center; gap:16px; padding:12px 0 }
 
-/* ========== Шапка ========== */
-header{
-  position:sticky; top:0; z-index:40;
-  backdrop-filter: saturate(160%) blur(10px);
-  background: linear-gradient( to bottom, rgba(8,10,18,0.75), rgba(8,10,18,0.25) );
-  border-bottom:1px solid var(--stroke);
-}
-.logo{
-  font-weight:800; letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--text);
-  text-shadow: 0 0 8px rgba(0,229,255,.35), 0 0 16px rgba(255,14,161,.25);
-}
+/* Шапка */
+header{ position:sticky; top:0; z-index:40; backdrop-filter: saturate(160%) blur(10px); background: linear-gradient( to bottom, rgba(8,10,18,0.75), rgba(8,10,18,0.25) ); border-bottom:1px solid var(--stroke) }
+.logo{ font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--text); text-shadow: 0 0 8px rgba(0,229,255,.35), 0 0 16px rgba(255,14,161,.25) }
 .spacer{ flex:1 }
 .menu{ display:flex; gap:12px; flex-wrap:wrap }
-.menu a{
-  padding:8px 12px;
-  border:1px solid var(--stroke);
-  border-radius:10px;
-  color:var(--text);
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-  transition:.25s ease;
-}
-.menu a:hover{
-  border-color: rgba(0,229,255,.55);
-  box-shadow: 0 0 0 2px rgba(0,229,255,.12) inset, 0 0 18px rgba(0,229,255,.25);
-  color:var(--neon1);
-}
+.menu a{ padding:8px 12px; border:1px solid var(--stroke); border-radius:10px; color:var(--text); background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)); transition:.25s ease }
+.menu a:hover{ border-color: rgba(0,229,255,.55); box-shadow: 0 0 0 2px rgba(0,229,255,.12) inset, 0 0 18px rgba(0,229,255,.25); color:var(--neon1) }
 
-/* ========== Хиро ========== */
-.hero{
-  display:grid; gap:10px;
-  padding:44px 0 18px;
-}
-
-/* Заголовок с лёгким «гличем» */
-.title{
-  font-size: clamp(28px, 5vw, 48px);
-  font-weight:900;
-  line-height:1.1;
-  letter-spacing:.04em;
-  position:relative;
-  display:inline-block;
-  text-shadow: 0 0 14px rgba(0,229,255,.35), 0 0 28px rgba(255,14,161,.25);
-}
-.title::before,
-.title::after{
-  content:attr(data-text);
-  position:absolute; inset:0; pointer-events:none;
-}
-.title::before{
-  color:var(--neon1); mix-blend-mode:screen;
-  transform: translate(1px, 0);
-  filter: blur(.5px);
-  animation: glitch1 3.5s infinite linear alternate-reverse;
-}
-.title::after{
-  color:var(--neon2); mix-blend-mode:screen;
-  transform: translate(-1px, 0);
-  filter: blur(.5px);
-  animation: glitch2 2.8s infinite linear alternate-reverse;
-}
-@keyframes glitch1{
-  0%{ clip-path: inset(0 0 88% 0) }
-  20%{ clip-path: inset(12% 0 60% 0) }
-  40%{ clip-path: inset(48% 0 32% 0) }
-  60%{ clip-path: inset(64% 0 18% 0) }
-  80%{ clip-path: inset(82% 0 0 0) }
-  100%{ clip-path: inset(0 0 0 0) }
-}
-@keyframes glitch2{
-  0%{ clip-path: inset(85% 0 0 0) }
-  20%{ clip-path: inset(60% 0 10% 0) }
-  40%{ clip-path: inset(30% 0 40% 0) }
-  60%{ clip-path: inset(10% 0 60% 0) }
-  80%{ clip-path: inset(0 0 85% 0) }
-  100%{ clip-path: inset(0 0 0 0) }
-}
-
+/* Хиро */
+.hero{ display:grid; gap:10px; padding:44px 0 18px }
+.title{ font-size: clamp(28px, 5vw, 48px); font-weight:900; line-height:1.1; letter-spacing:.04em; position:relative; display:inline-block; text-shadow: 0 0 14px rgba(0,229,255,.35), 0 0 28px rgba(255,14,161,.25) }
+.title::before,.title::after{ content:attr(data-text); position:absolute; inset:0; pointer-events:none }
+.title::before{ color:var(--neon1); mix-blend-mode:screen; transform: translate(1px, 0); filter: blur(.5px); animation: glitch1 3.5s infinite linear alternate-reverse }
+.title::after{ color:var(--neon2); mix-blend-mode:screen; transform: translate(-1px, 0); filter: blur(.5px); animation: glitch2 2.8s infinite linear alternate-reverse }
+@keyframes glitch1{0%{clip-path: inset(0 0 88% 0)}20%{clip-path: inset(12% 0 60% 0)}40%{clip-path: inset(48% 0 32% 0)}60%{clip-path: inset(64% 0 18% 0)}80%{clip-path: inset(82% 0 0 0)}100%{clip-path: inset(0 0 0 0)}}
+@keyframes glitch2{0%{clip-path: inset(85% 0 0 0)}20%{clip-path: inset(60% 0 10% 0)}40%{clip-path: inset(30% 0 40% 0)}60%{clip-path: inset(10% 0 60% 0)}80%{clip-path: inset(0 0 85% 0)}100%{clip-path: inset(0 0 0 0)}}
 .subtitle{ color:var(--muted); margin-top:2px }
 
-/* ========== Сетка разделов ========== */
-.grid{
-  display:grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap:16px;
-  margin-top:18px;
-}
+/* Сетка */
+.grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap:16px; margin-top:18px }
 .col-12{ grid-column: span 12 }
 .col-6{ grid-column: span 12 }
-@media (min-width: 760px){
-  .col-6{ grid-column: span 6 }
-}
+@media (min-width: 760px){ .col-6{ grid-column: span 6 } }
 
-/* ========== Карточки ========== */
-.card{
-  border:1px solid var(--stroke);
-  border-radius:16px;
-  background: var(--card);
-  box-shadow: var(--glow-soft);
-  overflow:hidden;
-}
+/* Карточки */
+.card{ border:1px solid var(--stroke); border-radius:16px; background: var(--card); box-shadow: var(--glow-soft); overflow:hidden }
 .card .body{ padding:18px }
-.card h2{
-  margin:0 0 10px;
-  font-size: clamp(18px, 2.6vw, 24px);
-  text-shadow: 0 0 10px rgba(0,229,255,.25);
-}
-/* Неоновая полоска сверху карточек */
-.bar{
-  height:3px;
-  background: linear-gradient(90deg, var(--neon2), var(--neon1), var(--neon3));
-  filter: saturate(140%);
-}
+.card h2{ margin:0 0 10px; font-size: clamp(18px, 2.6vw, 24px); text-shadow: 0 0 10px rgba(0,229,255,.25) }
+.bar{ height:3px; background: linear-gradient(90deg, var(--neon2), var(--neon1), var(--neon3)); filter: saturate(140%) }
 
-/* ========== Кнопки-ссылки ========== */
-.neon-btn{
-  display:inline-flex; align-items:center; gap:10px;
-  padding:10px 14px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.08);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  color:var(--text);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 0 14px rgba(0,229,255,0.08);
-  transition:.25s ease;
-  position:relative;
-}
-.neon-btn::after{
-  content:"";
-  position:absolute; inset:-1px;
-  border-radius:12px; pointer-events:none;
-  background: linear-gradient(90deg, rgba(0,229,255,.45), rgba(255,14,161,.45));
-  opacity:.28; filter: blur(16px);
-  transition:.25s ease;
-}
-.neon-btn:hover{
-  color:var(--neon1);
-  border-color: rgba(0,229,255,.55);
-  box-shadow: inset 0 0 0 1px rgba(0,229,255,.25), 0 0 24px rgba(0,229,255,.35);
-}
+/* Кнопки */
+.neon-btn{ display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.08); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color:var(--text); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 0 14px rgba(0,229,255,0.08); transition:.25s ease; position:relative }
+.neon-btn::after{ content:""; position:absolute; inset:-1px; border-radius:12px; pointer-events:none; background: linear-gradient(90deg, rgba(0,229,255,.45), rgba(255,14,161,.45)); opacity:.28; filter: blur(16px); transition:.25s ease }
+.neon-btn:hover{ color:var(--neon1); border-color: rgba(0,229,255,.55); box-shadow: inset 0 0 0 1px rgba(0,229,255,.25), 0 0 24px rgba(0,229,255,.35) }
 .btn-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:8px }
 
-/* ========== Виджеты Steam ========== */
-.widget-grid{
-  display:grid; gap:14px;
-  grid-template-columns: 1fr;           /* по одной колонке — в узком контейнере читается лучше */
-}
-@media (min-width: 760px){
-  .widget-grid{ grid-template-columns: 1fr 1fr } /* на широких — две колонки */
-}
-.widget{
-  border:1px solid var(--stroke);
-  border-radius:12px;
-  overflow:hidden;
-  background: rgba(0,0,0,.22);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset, 0 0 22px rgba(0,229,255,.10);
-  transition:.25s ease;
-}
-.widget:hover{
-  box-shadow: 0 0 0 1px rgba(0,229,255,.35) inset, 0 0 26px rgba(0,229,255,.35);
-}
-.widget iframe{
-  display:block;
-  width:100%;               /* игнорируем атрибут width у iframe и растягиваем по контейнеру */
-  height:190px;             /* стандартная высота виджета */
-  border:0;
-}
+/* Виджеты Steam */
+.widget-grid{ display:grid; gap:14px; grid-template-columns: 1fr }
+@media (min-width: 760px){ .widget-grid{ grid-template-columns: 1fr 1fr } }
+.widget{ border:1px solid var(--stroke); border-radius:12px; overflow:hidden; background: rgba(0,0,0,.22); box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset, 0 0 22px rgba(0,229,255,.10); transition:.25s ease }
+.widget:hover{ box-shadow: 0 0 0 1px rgba(0,229,255,.35) inset, 0 0 26px rgba(0,229,255,.35) }
+.widget iframe{ display:block; width:100%; height:190px; border:0 }
 
-/* ========== Подвал ========== */
-footer{
-  margin-top:28px;
-  padding:18px 0 0;
-  color:var(--muted);
-  border-top:1px solid var(--stroke);
-  text-align:center;
-  font-size:14px;
+/* Подвал */
+footer{ margin-top:28px; padding:18px 0 0; color:var(--muted); border-top:1px solid var(--stroke); text-align:center; font-size:14px }
+
+/* === КАСТОМНЫЙ DISCORD ВИДЖЕТ === */
+.discord-card{
+  border:1px solid var(--stroke);
+  border-radius:14px;
+  background: rgba(0,0,0,.22);
+  box-shadow: 0 0 24px rgba(0,229,255,0.18), 0 0 36px rgba(255,14,161,0.14);
+  overflow:hidden;
+}
+.discord-header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 14px;
+  background: linear-gradient(90deg, rgba(88,101,242,0.35), rgba(0,229,255,0.16));
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.discord-brand{ display:flex; align-items:center; gap:10px; color:#dadfff }
+.discord-brand svg{ width:22px; height:22px }
+.discord-name{ letter-spacing:.02em }
+.discord-online{ font-size:14px; color:var(--muted) }
+
+.discord-content{
+  display:flex; gap:12px; align-items:center; justify-content:space-between;
+  padding:14px;
+}
+.discord-info{ display:flex; flex-direction:column; gap:4px }
+.discord-title{ font-weight:700 }
+.discord-sub{ color:var(--muted); font-size:14px }
+
+.discord-channels{
+  display:grid; gap:8px; padding:0 14px 14px;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+}
+.discord-channel{
+  padding:8px 10px; border:1px solid rgba(255,255,255,0.06); border-radius:10px;
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+  font-size:14px; color:var(--text);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
