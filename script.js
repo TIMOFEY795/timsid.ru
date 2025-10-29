@@ -1,66 +1,70 @@
-// Установка текущего года в футере
-document.addEventListener('DOMContentLoaded', () => {
+// === Год в футере ===
+document.addEventListener('DOMContentLoaded', ()=>{
   const y = document.getElementById('y');
   if (y) y.textContent = new Date().getFullYear();
 });
 
-// ------- КАСТОМНЫЙ DISCORD ВИДЖЕТ -------
-// 1) Включи "Виджет сервера" в настройках Discord
-// 2) Вставь сюда ID сервера (число) и инвайт (у тебя: https://discord.gg/UsCkjrPPJd)
-const DISCORD_GUILD_ID = 'YOUR_SERVER_ID';           // <-- замени на свой ID
-const DISCORD_INVITE_URL = 'https://discord.gg/UsCkjrPPJd';
+// === LOADER: дождёмся анимации и уберём ===
+window.addEventListener('load', ()=>{
+  // время = длительность столкновения + запас (в мс)
+  setTimeout(()=> document.body.classList.add('loaded'), 1400);
+});
 
-async function loadDiscordWidget() {
-  const titleEl = document.getElementById('dc-title');
-  const subEl   = document.getElementById('dc-sub');
-  const onlineEl= document.getElementById('dc-online');
-  const joinBtn = document.getElementById('dc-join');
-  const chWrap  = document.getElementById('dc-channels');
+// === Меню (бургер) ===
+(function(){
+  const nav   = document.getElementById('topnav');
+  const toggle= document.getElementById('navToggle');
+  if (!nav || !toggle) return;
 
-  // Кнопка "Присоединиться" работает всегда
-  joinBtn.href = DISCORD_INVITE_URL;
+  toggle.addEventListener('click', ()=>{
+    const open = !nav.classList.contains('open');
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    if (open) nav.classList.add('nav-hover'); else nav.classList.remove('nav-hover');
+  });
+})();
 
-  if (!DISCORD_GUILD_ID || DISCORD_GUILD_ID.includes('YOUR')) {
-    titleEl.textContent = 'Discord сервер';
-    onlineEl.textContent = '—';
-    chWrap.hidden = true;
+// === Discord карточка (без «онлайн») ===
+const DISCORD_INVITE = 'https://discord.gg/UsCkjrPPJd';
+const DISCORD_GUILD_ID = ''; // если включишь Server Widget — вставь ID (иначе оставь пустым)
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  const title = document.getElementById('dc-title');
+  const sub   = document.getElementById('dc-sub');
+  const join  = document.getElementById('dc-join');
+  const wrap  = document.getElementById('dc-channels');
+
+  if (join) join.href = DISCORD_INVITE;
+
+  if (!DISCORD_GUILD_ID){
+    if (title) title.textContent = 'Discord сервер';
+    if (sub)   sub.textContent   = 'Нажми «Присоединиться», чтобы ворваться';
+    if (wrap)  wrap.hidden = true;
     return;
   }
 
-  const url = `https://discord.com/api/guilds/${DISCORD_GUILD_ID}/widget.json`;
-  try {
-    const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-
-    // Заголовки
-    titleEl.textContent = data.name || 'Discord';
-    subEl.textContent = data.instant_invite ? 'Сервер открыт для приглашений' : 'Виджет активен';
-    onlineEl.textContent = (data.presence_count ?? '—');
-
-    // Каналы (покажем до 6 штук)
-    chWrap.innerHTML = '';
-    const channels = (data.channels || []).slice(0, 6);
-    if (channels.length) {
-      channels.forEach(c => {
-        const div = document.createElement('div');
-        div.className = 'discord-channel';
-        div.textContent = `# ${c.name}`;
-        chWrap.appendChild(div);
-      });
-      chWrap.hidden = false;
-    } else {
-      chWrap.hidden = true;
-    }
-  } catch (e) {
-    // Фолбек: если не включён серверный виджет или CORS не дали
-    titleEl.textContent = 'Discord сервер';
-    subEl.textContent = 'Не удалось получить данные. Проверь «Виджет сервера» в настройках Discord.';
-    onlineEl.textContent = '—';
-    chWrap.hidden = true;
-    // консоль для отладки
-    console.debug('Discord widget load error:', e);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', loadDiscordWidget);
+  fetch(`https://discord.com/api/guilds/${DISCORD_GUILD_ID}/widget.json`, {cache:'no-store'})
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data=>{
+      if (title) title.textContent = data?.name || 'Discord';
+      if (sub)   sub.textContent   = data?.instant_invite ? 'Сервер открыт для приглашений' : 'Виджет активен';
+      if (wrap){
+        wrap.innerHTML = '';
+        const channels = (data?.channels || []).slice(0,6);
+        if (channels.length){
+          channels.forEach(c=>{
+            const d = document.createElement('div');
+            d.className = 'discord-channel';
+            d.textContent = `# ${c.name}`;
+            wrap.appendChild(d);
+          });
+          wrap.hidden = false;
+        } else wrap.hidden = true;
+      }
+      if (data?.instant_invite && join) join.href = data.instant_invite;
+    })
+    .catch(()=>{
+      if (sub)  sub.textContent = 'Не удалось получить данные. Используй кнопку.';
+      if (wrap) wrap.hidden = true;
+    });
+});
